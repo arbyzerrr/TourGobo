@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище Tour_GOBOModelContainer" CdmEntityContainer="Tour_GOBOEntities">
+    <EntitySetMapping Name="Countries">
+      <EntityTypeMapping TypeName="Tour_GOBOModel.Country">
+        <MappingFragment StoreEntitySet="Country">
+          <ScalarProperty Name="code" ColumnName="code" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="hotels">
+      <EntityTypeMapping TypeName="Tour_GOBOModel.hotel">
+        <MappingFragment StoreEntitySet="hotel">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="countofstars" ColumnName="countofstars" />
+          <ScalarProperty Name="countrycode" ColumnName="countrycode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HotelCommnets">
+      <EntityTypeMapping TypeName="Tour_GOBOModel.HotelCommnet">
+        <MappingFragment StoreEntitySet="HotelCommnet">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="hotelid" ColumnName="hotelid" />
+          <ScalarProperty Name="text" ColumnName="text" />
+          <ScalarProperty Name="author" ColumnName="author" />
+          <ScalarProperty Name="creationdate" ColumnName="creationdate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HotelImages">
+      <EntityTypeMapping TypeName="Tour_GOBOModel.HotelImage">
+        <MappingFragment StoreEntitySet="HotelImage">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="hotelid" ColumnName="hotelid" />
+          <ScalarProperty Name="imagesource" ColumnName="imagesource" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="Tour_GOBOModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tour_">
+      <EntityTypeMapping TypeName="Tour_GOBOModel.Tour_">
+        <MappingFragment StoreEntitySet="Tour_">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="tickestcount" ColumnName="tickestcount" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="imagepreview" ColumnName="imagepreview" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="isactual" ColumnName="isactual" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Types">
+      <EntityTypeMapping TypeName="Tour_GOBOModel.Type">
+        <MappingFragment StoreEntitySet="Type">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="description" ColumnName="description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="Tour_GOBOModel.User">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="login" ColumnName="login" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="type_user" ColumnName="type_user" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="HotelOfTour" TypeName="Tour_GOBOModel.HotelOfTour" StoreEntitySet="HotelOfTour">
+      <EndProperty Name="hotel">
+        <ScalarProperty Name="id" ColumnName="Hotelld" />
+      </EndProperty>
+      <EndProperty Name="Tour_">
+        <ScalarProperty Name="id" ColumnName="Tourld" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="TypeOfTour" TypeName="Tour_GOBOModel.TypeOfTour" StoreEntitySet="TypeOfTour">
+      <EndProperty Name="Tour_">
+        <ScalarProperty Name="id" ColumnName="Tourld" />
+      </EndProperty>
+      <EndProperty Name="Type">
+        <ScalarProperty Name="id" ColumnName="Typeld" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

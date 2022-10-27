@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Tour_GOBOModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Country">
+    <Key>
+      <PropertyRef Name="code" />
+    </Key>
+    <Property Name="code" Type="String" MaxLength="2" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="hotels" Relationship="Self.FK_hotel_Country" FromRole="Country" ToRole="hotel" />
+  </EntityType>
+  <EntityType Name="hotel">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="countofstars" Type="Int32" />
+    <Property Name="countrycode" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="Country" Relationship="Self.FK_hotel_Country" FromRole="hotel" ToRole="Country" />
+    <NavigationProperty Name="HotelCommnets" Relationship="Self.FK_HotelCommnet_hotel" FromRole="hotel" ToRole="HotelCommnet" />
+    <NavigationProperty Name="HotelImages" Relationship="Self.FK_HotelImage_hotel" FromRole="hotel" ToRole="HotelImage" />
+    <NavigationProperty Name="Tour_" Relationship="Self.HotelOfTour" FromRole="hotel" ToRole="Tour_" />
+  </EntityType>
+  <EntityType Name="HotelCommnet">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="hotelid" Type="Int32" />
+    <Property Name="text" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="author" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="creationdate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="hotel" Relationship="Self.FK_HotelCommnet_hotel" FromRole="HotelCommnet" ToRole="hotel" />
+  </EntityType>
+  <EntityType Name="HotelImage">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" />
+    <Property Name="hotelid" Type="Int32" />
+    <Property Name="imagesource" Type="Binary" MaxLength="50" FixedLength="false" />
+    <NavigationProperty Name="hotel" Relationship="Self.FK_HotelImage_hotel" FromRole="HotelImage" ToRole="hotel" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Tour_">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tickestcount" Type="Int32" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="imagepreview" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="price" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="isactual" Type="Boolean" />
+    <NavigationProperty Name="hotels" Relationship="Self.HotelOfTour" FromRole="Tour_" ToRole="hotel" />
+    <NavigationProperty Name="Types" Relationship="Self.TypeOfTour" FromRole="Tour_" ToRole="Type" />
+  </EntityType>
+  <EntityType Name="Type">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="description" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Tour_" Relationship="Self.TypeOfTour" FromRole="Type" ToRole="Tour_" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="type_user" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_hotel_Country">
+    <End Role="Country" Type="Self.Country" Multiplicity="0..1" />
+    <End Role="hotel" Type="Self.hotel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="code" />
+      </Principal>
+      <Dependent Role="hotel">
+        <PropertyRef Name="countrycode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HotelCommnet_hotel">
+    <End Role="hotel" Type="Self.hotel" Multiplicity="0..1" />
+    <End Role="HotelCommnet" Type="Self.HotelCommnet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="hotel">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="HotelCommnet">
+        <PropertyRef Name="hotelid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HotelImage_hotel">
+    <End Role="hotel" Type="Self.hotel" Multiplicity="0..1" />
+    <End Role="HotelImage" Type="Self.HotelImage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="hotel">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="HotelImage">
+        <PropertyRef Name="hotelid" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="HotelOfTour">
+    <End Role="hotel" Type="Self.hotel" Multiplicity="*" />
+    <End Role="Tour_" Type="Self.Tour_" Multiplicity="*" />
+  </Association>
+  <Association Name="TypeOfTour">
+    <End Role="Tour_" Type="Self.Tour_" Multiplicity="*" />
+    <End Role="Type" Type="Self.Type" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="Tour_GOBOEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Countries" EntityType="Self.Country" />
+    <EntitySet Name="hotels" EntityType="Self.hotel" />
+    <EntitySet Name="HotelCommnets" EntityType="Self.HotelCommnet" />
+    <EntitySet Name="HotelImages" EntityType="Self.HotelImage" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="Tour_" EntityType="Self.Tour_" />
+    <EntitySet Name="Types" EntityType="Self.Type" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <AssociationSet Name="FK_hotel_Country" Association="Self.FK_hotel_Country">
+      <End Role="Country" EntitySet="Countries" />
+      <End Role="hotel" EntitySet="hotels" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HotelCommnet_hotel" Association="Self.FK_HotelCommnet_hotel">
+      <End Role="hotel" EntitySet="hotels" />
+      <End Role="HotelCommnet" EntitySet="HotelCommnets" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HotelImage_hotel" Association="Self.FK_HotelImage_hotel">
+      <End Role="hotel" EntitySet="hotels" />
+      <End Role="HotelImage" EntitySet="HotelImages" />
+    </AssociationSet>
+    <AssociationSet Name="HotelOfTour" Association="Self.HotelOfTour">
+      <End Role="hotel" EntitySet="hotels" />
+      <End Role="Tour_" EntitySet="Tour_" />
+    </AssociationSet>
+    <AssociationSet Name="TypeOfTour" Association="Self.TypeOfTour">
+      <End Role="Tour_" EntitySet="Tour_" />
+      <End Role="Type" EntitySet="Types" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

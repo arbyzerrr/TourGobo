@@ -1,0 +1,16 @@
+﻿<Window x:Class="oldskyl.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:oldskyl"
+        mc:Ignorable="d"
+        Title="LoginWindow" Height="200" Width="400" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Button x:Name="ButtonEnter" Content="Войти" HorizontalAlignment="Center" VerticalAlignment="Top" Click="ButtonEnter_Click" Margin="0,136,0,0"/>
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Login" VerticalAlignment="Top" Margin="114,19,0,0"/>
+        <TextBox x:Name="textBox_login" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Width="172" Margin="0,40,0,0"/>
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Password" VerticalAlignment="Top" Margin="114,71,0,0" />
+        <PasswordBox x:Name="passwordBox_password" HorizontalAlignment="Center" VerticalAlignment="Top" Width="172" Margin="0,92,0,0"/>
+    </Grid>
+</Window>
